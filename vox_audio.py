@@ -96,10 +96,7 @@ def get_ted_labels(audio_name, feature_length):
     return label
 
 def get_vox_labels(audio_path, feature_length):
-    # root = 'all_labels_ted/'
     label = np.zeros(1)
-#    print(audio_path)
-    # file_name = root+audio_name+'.txt'
     file = open(audio_path,'rb')
     for line in file:
     # i += 1
@@ -231,23 +228,12 @@ def audiofile_to_input_vector_libri(audio_filename, numsamples=160, numcontext=1
     return (train_input, train_label)
 
 def audiofile_to_input_vector_vox(audio_path, label_path, numsamples=160, numcontext=15):
-	# audio_name = audio_filename.split(' ')[0]
-       # paths = path.split(' ')
-	#audio = audio_path
-#        print('hey hey')
     total_path = audio_path.split('/')
     t_path = total_path[-1].split('.')
     audio = total_path[-4]+'/'+total_path[-3]+'/'+total_path[-2]+'/'+t_path[0]+'.wav'
-#        audio = audio_path
-#        print(audio)
-#    print(audio)
-#    print(label_path)
-#    print('\n\n\n')
     r_audio, sampling_rate = read_audio(audio)
     train_input = audioToInputVector(r_audio, sampling_rate, 160, 15)
     train_label = get_vox_labels(label_path, train_input.shape[0])
-        #print(train_input.shape)
- #       print('hey hey')
     return (train_input, train_label)
 
 
